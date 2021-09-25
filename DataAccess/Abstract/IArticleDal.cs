@@ -10,6 +10,6 @@ namespace DataAccess.Abstract
 {
     public interface IArticleDal:IEntityRepository<Article>
     {
-
+        List<Article> GetArticleWithCategory();
     }
 }
