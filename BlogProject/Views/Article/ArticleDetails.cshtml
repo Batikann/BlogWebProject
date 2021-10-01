@@ -15,51 +15,54 @@
         <div class="container">
             <div class="row">
                 <!--left-->
-            <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-                @foreach (var item in Model)
-                {
-                    <div class="blog-grid-top">
-                        <div class="b-grid-top">
-                            <div class="blog_info_left_grid">
-                                <a href="single.html">
-                                    <img src="images/b1.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="blog-info-middle">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-calendar-alt"></i> @(((DateTime)item.ArticleCreateDate).ToString("yy-MM-dd"))
-                                        </a>
-                                    </li>
-                                    <li class="mx-2">
-                                        <a href="#">
-                                            <i class="far fa-thumbs-up"></i> 201 Likes
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-comment"></i> 15 Comments
-                                        </a>
-                                    </li>
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                    @foreach (var item in Model)
+                    {
+                        <div class="blog-grid-top">
+                            <div class="b-grid-top">
+                                <div class="blog_info_left_grid">
+                                    <a href="single.html">
+                                        <img src="images/b1.jpg" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                                <div class="blog-info-middle">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-calendar-alt"></i> @(((DateTime)item.ArticleCreateDate).ToString("yy-MM-dd"))
+                                            </a>
+                                        </li>
+                                        <li class="mx-2">
+                                            <a href="#">
+                                                <i class="far fa-thumbs-up"></i> 201 Likes
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-comment"></i> 15 Comments
+                                            </a>
+                                        </li>
 
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
+
+                            <h3>
+                                <a href="single.html">@item.ArticleTitle </a>
+                            </h3>
+                            <p>
+                                @item.ArticleContent
+                            </p>
+                            @*<a href="single.html" class="btn btn-primary read-m">Read More</a>*@
                         </div>
+                    }
 
-                        <h3>
-                            <a href="single.html">@item.ArticleTitle </a>
-                        </h3>
-                        <p>
-                           @item.ArticleContent
-                        </p>
-                        @*<a href="single.html" class="btn btn-primary read-m">Read More</a>*@
-                    </div>
-                }
-                
-                @await Html.PartialAsync("/Views/Comment/CommentListByBlog.cshtml")
-                @await Html.PartialAsync("/Views/Comment/PartialAddComment.cshtml")
-            </div>
+
+                    @await Component.InvokeAsync("CommentListByBlog", new { id = ViewBag.id })
+
+                    @*@await Html.PartialAsync("/Views/Comment/CommentListByBlog.cshtml")*@
+                    @await Html.PartialAsync("/Views/Comment/PartialAddComment.cshtml")
+                </div>
 
                 <!--//left-->
                 <!--right-->
@@ -77,23 +80,7 @@
                             </form>
 
                         </div>
-                        <div class="tech-btm">
-                            <h4>Categories</h4>
-                            <ul class="list-group single">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Cras justo odio
-                                    <span class="badge badge-primary badge-pill">14</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Dapibus ac facilisis in
-                                    <span class="badge badge-primary badge-pill">2</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Morbi leo risus
-                                    <span class="badge badge-primary badge-pill">1</span>
-                                </li>
-                            </ul>
-                        </div>
+                        @await Component.InvokeAsync("CategoryList")
                         <div class="tech-btm">
                             <h4>Top stories of the week</h4>
 
