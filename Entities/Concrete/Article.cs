@@ -16,7 +16,8 @@ namespace Entities.Concrete
         public bool ArticleStatus { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
         public List<Comment> Comments { get; set; }
     }
 }

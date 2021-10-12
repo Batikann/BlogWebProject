@@ -1,19 +1,33 @@
 ﻿@model IEnumerable<Entities.Concrete.Comment>
 
-<div class="comment-top">
-    <h4>Comments</h4>
-    @foreach (var item in Model)
-    {
-        <div class="media">
-            <img src="~/blogthema/images/t1.jpg" alt="" class="img-fluid" />
-            <div class="media-body">
-                <h5 class="mt-0">@item.CommentUserName</h5>
-                <p>
-                   @item.CommentContent
-                </p>
 
+@if (ViewBag.values == 0)
+{
+    <div class="comment-top">
+        <h4>Comments</h4>
+        <div style="font-size: 20px">Bu Bloga Ait Yorum Bulunmamaktadır.İlk Yorum Yapan Olmak ister misiniz?</div>
+    </div>
+}
+else
+{
+    <div class="comment-top">
+        <h4>Comments</h4>
+        @foreach (var item in Model)
+        {
+            <div class="media">
+                <img src="~/blogthema/images/t1.jpg" alt="" class="img-fluid" />
+                <div class="media-body">
+                    <h5 class="mt-0">@item.CommentUserName</h5>
+                    <p>
+                        @item.CommentContent
+                    </p>
+
+                </div>
             </div>
-        </div>
-    }
-    
-</div>
+        }
+
+    </div>
+}
+
+
+

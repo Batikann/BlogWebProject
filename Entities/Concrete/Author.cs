@@ -17,5 +17,6 @@ namespace Entities.Concrete
         public string AuthorMail { get; set; }
         public string AuthorPassword { get; set; }
         public bool AuthorStatus { get; set; }
+        public List<Article> Articles { get; set; }
     }
 }

@@ -52,5 +52,10 @@ namespace Business.Concrete
         {
             return _articleDal.GetArticleWithCategory();
         }
+
+        public List<Article> GetArticleWithAuthor(int id)
+        {
+            return _articleDal.GetList(x => x.AuthorId == id);
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace Business.Abstract
         List<Article> GetBlogById(int id);
         Article GetArticle(int id);
         List<Article> GetArticleWithCategory();
+        List<Article> GetArticleWithAuthor(int id);
     }
 }

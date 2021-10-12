@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=BlogWebDb;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=BlogWebProjectDb;Trusted_Connection=true");
         }
 
         public DbSet<About> Abouts { get; set; }

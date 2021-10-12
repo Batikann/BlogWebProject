@@ -14,6 +14,7 @@ namespace BlogProject.ViewComponents.Comment
         public IViewComponentResult Invoke(int id)
         {
             var values = commentManager.GetAllComment(id);
+            ViewBag.values = values.Count();
             return View(values);
         }
     }

@@ -74,10 +74,15 @@ namespace DataAccess.Migrations
                     b.Property<string>("ArticleTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("ArticleId");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CategoryId");
 
@@ -202,11 +207,19 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Article", b =>
                 {
+                    b.HasOne("Entities.Concrete.Author", "Author")
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Concrete.Category", "Category")
                         .WithMany("Articles")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Category");
                 });
@@ -225,6 +238,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.Article", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Author", b =>
+                {
+                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Category", b =>

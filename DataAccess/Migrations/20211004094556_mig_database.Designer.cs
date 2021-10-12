@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(BlogWebDbContext))]
-    [Migration("20210914124947_mig_article")]
-    partial class mig_article
+    [Migration("20211004094556_mig_database")]
+    partial class mig_database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,10 +76,15 @@ namespace DataAccess.Migrations
                     b.Property<string>("ArticleTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.HasKey("ArticleId");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CategoryId");
 
@@ -147,6 +152,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CommentContent")
                         .HasColumnType("nvarchar(max)");
 
@@ -163,6 +171,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CommentId");
+
+                    b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
                 });
@@ -199,13 +209,42 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Article", b =>
                 {
+                    b.HasOne("Entities.Concrete.Author", "Author")
+                        .WithMany("Articles")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Concrete.Category", "Category")
                         .WithMany("Articles")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Author");
+
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Comment", b =>
+                {
+                    b.HasOne("Entities.Concrete.Article", "Article")
+                        .WithMany("Comments")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Article", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Author", b =>
+                {
+                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Category", b =>
