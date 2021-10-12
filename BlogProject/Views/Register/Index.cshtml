@@ -39,9 +39,22 @@
                             @Html.ValidationMessageFor(x => x.AuthorPassword,"",new{@class="text-danger"})
                         </div>
                         <div class="form-group col-md-6">
-                                <label for="exampleInputPassword3 mb-2">Confirm Password</label>
-                                <input type="password" class="form-control" id="password2" name="PasswordAgain">
-                            </div>
+                            <label for="exampleInputPassword3 mb-2">Confirm Password</label>
+                            <input type="password" class="form-control" id="password2" name="PasswordAgain">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1 mb-2">City</label>
+                            @Html.DropDownList("cities",(ViewBag.cities),"Select City",new {@class="form-control dropdown"})
+                        
+                        </div>
+                        @*<div class="form-group col-md-6">
+                            <label for="exampleInputPassword3 mb-2">Confirm Password</label>
+                            <input type="password" class="form-control" id="password2" name="PasswordAgain">
+                        </div>*@
 
                     </div>
                     <button type="submit" class="btn btn-primary submit mb-4">Register</button>
